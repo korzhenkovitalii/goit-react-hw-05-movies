@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { fetchPopularMovies } from 'services/services';
 
 export const Home = () => {
@@ -13,7 +15,9 @@ export const Home = () => {
       <h2>Trending today</h2>
       <ul>
         {movies.map(movie => (
-          <li key={movie.title}>{movie.title}</li>
+          <li key={movie.title}>
+            <Link to={`${movie.id}`}>{movie.title}</Link>
+          </li>
         ))}
       </ul>
     </>

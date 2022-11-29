@@ -12,3 +12,12 @@ export async function fetchPopularMovies() {
   return response.data.results
 }
  
+
+export async function fetchMoviesById(id) {
+  const response = await axios(`/movie/${id}`, {
+    params: {
+      api_key: API_KEY,
+    },
+  });
+  return response.data.results;
+}
