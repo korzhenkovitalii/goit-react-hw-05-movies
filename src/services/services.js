@@ -9,15 +9,15 @@ export async function fetchPopularMovies() {
       api_key: API_KEY,
     },
   });
-  return response.data.results
+  return response.data.results;
 }
- 
 
 export async function fetchMoviesById(id) {
-  const response = await axios(`/movie/${id}`, {
-    params: {
-      api_key: API_KEY,
-    },
-  });
-  return response.data.results;
+  const response = await axios(`movie/${id}?api_key=${API_KEY}`);
+  return response.data;
+}
+
+export async function fetchImageMoviesById(id) {
+  const response = await axios(`movie/${id}/images?api_key=${API_KEY}`);
+  return response.data;
 }

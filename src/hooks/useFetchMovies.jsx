@@ -6,10 +6,12 @@ export const useFetchMovies = () => {
   const [movie, setMovies] = useState(null);
 
   const { id } = useParams();
+  
 
   useEffect(() => {
-    fetchMoviesById(id).then(res => (setMovies(res), console.log(res)));
+    fetchMoviesById(id).then(res => (console.log(res), setMovies(res)));
+    fetchMoviesById(id).then(res => (console.log(res), setMovies(res)));
   }, [id]);
-
+  
   return movie;
 };
