@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMoviesById } from 'services/services';
+import {
+  fetchMovieCredits,
+  fetchMovieReviews,
+  fetchMoviesById,
+} from 'services/services';
 
 export const useFetchMovies = () => {
-  const [movie, setMovies] = useState(null);
+  const [movie, setMovie] = useState(null);
+  const [casts, setCasts] = useState('');
+  const [reviews, setReviews] = useState('');
 
   const { id } = useParams();
-  
 
   useEffect(() => {
-    fetchMoviesById(id).then(res => (console.log(res), setMovies(res)));
-    fetchMoviesById(id).then(res => (console.log(res), setMovies(res)));
+    fetchMoviesById(id).then(setMovie);
+    fetchMovieCredits(id).then(setCasts);
+    fetchMovieReviews(id).then(setReviews);
   }, [id]);
-  
-  return movie;
+
+  console.log(casts);
+  return [movie, casts, reviews];
 };
