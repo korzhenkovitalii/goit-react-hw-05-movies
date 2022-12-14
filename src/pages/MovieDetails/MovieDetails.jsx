@@ -1,5 +1,5 @@
 import { useFetchMovies } from 'hooks/useFetchMovies';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import {
   MovieImage,
   Button,
@@ -33,13 +33,14 @@ export const MovieDetails = () => {
           <p>Additional information</p>
           <ul>
             <li>
-              <Link>Cast</Link>
+              <Link to="cast">Cast</Link>
             </li>
             <li>
-              <Link>Rewiew</Link>
+              <Link to="reviews">Review</Link>
             </li>
           </ul>
         </div>
+        <Outlet />
       </>
     )
   );
