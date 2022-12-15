@@ -1,5 +1,5 @@
 import { useFetchMovies } from 'hooks/useFetchMovies';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   MovieImage,
   Button,
@@ -10,10 +10,16 @@ import {
 export const MovieDetails = () => {
   const [movie] = useFetchMovies();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location);
+
   return (
     movie && (
       <>
-        <Button type="button">&#8592;Go back</Button>
+        <Button type="button" onClick={() => navigate(location?.state?.from)}>
+          &#8592;Go back
+        </Button>
         <Wrapper>
           <MovieImage
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { fetchPopularMovies } from 'services/services';
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     fetchPopularMovies().then(res => setMovies(res));
@@ -16,7 +17,12 @@ export const Home = () => {
       <ul>
         {movies.map(movie => (
           <li key={movie.title}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+            <Link
+              to={`/movies/${movie.id}`}
+              state={{ from: location.pathname }}
+            >
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>

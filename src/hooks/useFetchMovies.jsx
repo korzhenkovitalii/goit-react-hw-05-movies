@@ -11,6 +11,6 @@ export const useFetchMovies = () => {
     fetchMoviesById(id).then(setMovie);
   }, [id]);
 
-  console.log(movie);
+  // console.log(movie);
   return [movie];
 };

@@ -34,3 +34,12 @@ export async function fetchMovieReviews(id) {
   );
   return response.data;
 }
+
+//Поиск фильмов по имени
+export async function fetchMoviesByName(query) {
+  const response = await axios(
+    `search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=1&include_adult=false`
+  );
+  // console.log(response.data.results);
+  return response.data.results;
+}
