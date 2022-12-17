@@ -1,9 +1,12 @@
+import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMoviesByName } from 'services/services';
 
 export const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
+ 
 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('search');
@@ -27,18 +30,11 @@ export const Movies = () => {
           type="text"
           name="search"
           autoComplete="off"
-
-          // value={searchQuery}
-          // onChange={handleSearchQueryChange}
         />
 
         <button>Search</button>
       </form>
-      <ul>
-        {movies.map(item => (
-          <li key={item.id}>{item.original_title}</li>
-        ))}
-      </ul>
+      {movies && <MoviesList movies={movies} location={location} />}
     </>
   );
 };

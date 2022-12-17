@@ -12,7 +12,7 @@ export const MovieDetails = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location);
+  console.log(location);
 
   return (
     movie && (
@@ -39,10 +39,14 @@ export const MovieDetails = () => {
           <p>Additional information</p>
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link to="cast" state={{ from: location.state.from }}>
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to="reviews">Review</Link>
+              <Link to="reviews" state={{ from: location.state.from }}>
+                Review
+              </Link>
             </li>
           </ul>
         </div>

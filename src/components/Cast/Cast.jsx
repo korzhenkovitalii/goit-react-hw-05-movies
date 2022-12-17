@@ -10,7 +10,6 @@ export const Cast = () => {
     fetchMovieCredits(id).then(setCasts);
   }, [id]);
 
-  console.log(casts);
 
   return (
     casts && (
