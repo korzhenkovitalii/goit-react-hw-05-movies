@@ -1,8 +1,16 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import { getMovieById } from '../../API';
 import { useEffect, useState } from 'react';
 
-import { MovieInfoWrapper, Poster, MovieDiscription } from './MovieId.styled';
+import {
+  Back,
+  MovieInfoWrapper,
+  Poster,
+  Genre,
+  Link,
+  MainMovieDescription,
+  AdditionalMovieDescription,
+} from './MovieId.styled';
 
 export const MovieId = () => {
   const [movieById, setMovieById] = useState(null);
@@ -15,7 +23,7 @@ export const MovieId = () => {
 
   return (
     <>
-      <button type="button">Go back</button>
+      <Back to="/">Go back</Back>
       {movieById && (
         <>
           <MovieInfoWrapper>
@@ -23,30 +31,25 @@ export const MovieId = () => {
               src={`https://image.tmdb.org/t/p/w200/${movieById.poster_path}`}
               alt={movieById.name}
             />
-            <MovieDiscription>
-              <h3>{movieById.title || movieById.name}</h3>
+            <MainMovieDescription>
+              <h2>{movieById.title || movieById.name}</h2>
               <div>User score: {movieById.popularity}</div>
               <h3>Overview</h3>
               <div>{movieById.overview}</div>
               <h3>Genres</h3>
               <div>
                 {movieById.genres.map(el => (
-                  <span key={el.id} style={{ marginRight: '10px' }}>
-                    {el.name}
-                  </span>
+                  <Genre key={el.id}>{el.name}</Genre>
                 ))}
               </div>
-            </MovieDiscription>
+            </MainMovieDescription>
           </MovieInfoWrapper>
-          <div
-            style={{
-              padding: '8px 0',
-              borderTop: '2px solid rgba(0,0,0,0.5)',
-              borderBottom: '2px solid rgba(0,0,0,0.5)',
-            }}
-          >
-            Additional information
-          </div>
+          <AdditionalMovieDescription>
+            <h3>Additional information</h3>
+            <Link to="cast">Cast</Link>
+            <Link to="reviews">Reviews</Link>
+            <Outlet />
+          </AdditionalMovieDescription>
         </>
       )}
     </>
