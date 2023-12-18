@@ -63,7 +63,6 @@ async function getMovieByQuery(query) {
       `/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
       headers
     );
-    console.log(response.data.results);
     return response.data.results;
   } catch (error) {
     console.log(error);

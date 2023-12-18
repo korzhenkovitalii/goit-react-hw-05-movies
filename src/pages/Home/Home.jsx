@@ -14,7 +14,7 @@ export const Home = () => {
       <h1>Trending today</h1>
       {trendingMovies?.map(el => (
         <li key={el.id}>
-          <Link to={`movies/${el.id}`} key={el.id}>{el.title || el.name}</Link>
+          <Link to={`movies/${el.id}`} key={el.id}  >{el.title || el.name}</Link>
         </li>
       ))}
     </>

@@ -42,7 +42,7 @@ export const Main = styled.main`
 export const Footer = styled.footer`
   display: flex;
   flex-shrink: 0;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 54px;
   background-color: orange;

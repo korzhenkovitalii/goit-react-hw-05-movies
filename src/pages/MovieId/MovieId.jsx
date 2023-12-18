@@ -1,4 +1,4 @@
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { getMovieById } from '../../API';
 import { useEffect, useState } from 'react';
 
@@ -15,6 +15,8 @@ import {
 export const MovieId = () => {
   const [movieById, setMovieById] = useState(null);
 
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export const MovieId = () => {
 
   return (
     <>
-      <Back to="/">Go back</Back>
+      <Back to={backLinkHref}>Go back</Back>
       {movieById && (
         <>
           <MovieInfoWrapper>

@@ -1,23 +1,31 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import { getMovieByQuery } from '../../API';
 
-import { InputWrapper, Input, SearchButton,Link } from './Movies.styled';
+import { InputWrapper, Input, SearchButton, Link } from './Movies.styled';
 
 export const Movie = () => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlSearch = searchParams.get('query') ?? '';
   const [moviesByQuery, setMoviesByQuery] = useState([]);
 
   const SubmitForm = e => {
     e.preventDefault();
-    setQuery(e.target[0].value);
+    const query = e.target[0].value;
+
+    const nextParams = query !== '' ? { query } : {};
+    setSearchParams(nextParams);
+    e.target.reset();
   };
 
   useEffect(() => {
-    if (!query) {
+    if (!urlSearch) {
+      setMoviesByQuery([]);
       return;
     }
-    getMovieByQuery(query).then(data => setMoviesByQuery(data));
-  }, [query]);
+    getMovieByQuery(urlSearch).then(data => setMoviesByQuery(data));
+  }, [urlSearch]);
 
   return (
     <>
@@ -27,7 +35,13 @@ export const Movie = () => {
       </InputWrapper>
       {moviesByQuery.length > 0
         ? moviesByQuery.map(el => (
-            <Link to={`${el.id}`} key={el.id}>{el.title || el.name}</Link>
+            <Link
+              to={`${el.id}`}
+              key={el.id}
+              state={{ from: `/movies?query=${urlSearch}` }}
+            >
+              {el.title || el.name}
+            </Link>
           ))
         : null}
     </>
